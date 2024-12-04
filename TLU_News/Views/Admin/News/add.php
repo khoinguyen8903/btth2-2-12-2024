@@ -1,22 +1,16 @@
-<?php
-require_once __DIR__ . '/../../../models/News.php';
-?>
+<h1>Thêm tin mới</h1>
 <form action="index.php?controller=news&action=add" method="POST">
-    <div class="mb-3">
-        <label for="title" class="form-label">Tiêu Đề</label>
-        <input type="text" class="form-control" name="title" required>
-    </div>
-    <div class="mb-3">
-        <label for="content" class="form-label">Nội Dung</label>
-        <textarea class="form-control" name="content" required></textarea>
-    </div>
-    <div class="mb-3">
-        <label for="image" class="form-label">Hình Ảnh</label>
-        <input type="text" class="form-control" name="image" required>
-    </div>
-    <div class="mb-3">
-        <label for="category_id" class="form-label">Danh Mục</label>
-        <input type="number" class="form-control" name="category_id" required>
-    </div>
-    <button type="submit" class="btn btn-primary">Thêm Tin</button>
+    <label>Tiêu đề</label><br>
+    <input type="text" name="title" required><br>
+
+    <label>Nội dung</label><br>
+    <textarea name="content" required></textarea><br>
+
+    <label>Hình ảnh</label><br>
+    <input type="text" name="image" required><br>
+
+    <label>Danh mục</label><br>
+    <input type="number" name="category_id" required><br>
+
+    <button type="submit">Thêm</button>
 </form>
