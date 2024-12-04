@@ -1,0 +1,6 @@
+RewriteEngine On
+RewriteBase /btth2-2-12-2024/
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?controller=$1 [QSA,L]
