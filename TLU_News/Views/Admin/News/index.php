@@ -33,7 +33,19 @@ $newsList = News::getAll();
             <h1>Danh sách Tin tức</h1>
             <a href="index.php?controller=news&action=add" class="btn btn-add">Thêm tin mới</a>
         </header>
-
+        <form method="GET" action="" style="margin-top: 10px;">
+                <input
+                    type="text"
+                    name="keyword"
+                    placeholder="Tìm kiếm tin tức..."
+                   
+                    style="padding: 8px; width: 300px; border: 1px solid #ddd; border-radius: 4px;">
+                <button
+                    type="submit"
+                    style="padding: 8px 15px; background-color: #007bff; color: #fff; border: none; border-radius: 4px;">
+                    Tìm kiếm
+                </button>
+            </form>
         <table class="table">
             <thead>
                 <tr>
@@ -46,20 +58,27 @@ $newsList = News::getAll();
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($newsList as $news): ?>
-                    <tr>
-                        <td><?= $news['id'] ?></td>
-                        <td><?= htmlspecialchars($news['title']) ?></td>
-                        <td><?= htmlspecialchars($news['content']) ?></td>
-                        <td><?= htmlspecialchars($news['image']) ?></td>
-                        <td><?= htmlspecialchars($news['category_id']) ?></td>
-                        <td>
-                            <a href="index.php?controller=news&action=edit&id=<?= $news['id'] ?>" class="btn btn-edit">Sửa</a>
-                            <a href="index.php?controller=news&action=delete&id=<?= $news['id'] ?>" class="btn btn-delete" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">Xóa</a>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
+    <?php 
+    $keyword = $_GET['keyword'] ?? ''; 
+    foreach ($newsList as $news):
+        if (!empty($keyword) && stripos($news['title'], $keyword) === false) {
+            continue;
+        }
+    ?>
+        <tr>
+            <td><?= $news['id'] ?></td>
+            <td><?= htmlspecialchars($news['title']) ?></td>
+            <td><?= htmlspecialchars($news['content']) ?></td>
+            <td><?= htmlspecialchars($news['image']) ?></td>
+            <td><?= htmlspecialchars($news['category_id']) ?></td>
+            <td>
+                <a href="index.php?controller=news&action=edit&id=<?= $news['id'] ?>" class="btn btn-edit">Sửa</a>
+                <a href="index.php?controller=news&action=delete&id=<?= $news['id'] ?>" class="btn btn-delete" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">Xóa</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</tbody>
+
         </table>
     </div>
 </body>
