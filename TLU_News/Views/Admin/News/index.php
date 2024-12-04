@@ -3,13 +3,8 @@ require_once __DIR__ . '/../../../models/News.php';
 
 // Lấy tất cả tin tức từ cơ sở dữ liệu
 $newsList = News::getAll();
-
-// Debug kết quả trả về từ cơ sở dữ liệu
-var_dump($newsList);  // In ra kiểu dữ liệu và nội dung của $newsList
-
-// Nếu là mảng, bạn có thể dùng print_r để dễ đọc hơn
-// print_r($newsList);
 ?>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -18,7 +13,28 @@ var_dump($newsList);  // In ra kiểu dữ liệu và nội dung của $newsList
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Quản Lý Tin Tức</title>
 </head>
-<body>
+<body><header class="bg-primary text-white py-4 text-center">
+        <h1>Trang Quản Lý</h1>
+    </header>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+            <a class="nav-link" href="../Dashboard.php">Trang chủ</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../../controllers/adminController.php?logout=true";>Đăng Xuất</a>
+            </li>
+            </ul>
+        </div>
+        </div>
+    </nav>
     <div class="container mt-5">
         <h1>Danh Sách Tin Tức</h1>
         <a href="add.php?controller=news&action=add" class="btn btn-success mb-3">Thêm Tin Tức</a>
