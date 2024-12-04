@@ -28,38 +28,39 @@ $newsList = News::getAll();
     </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <h1>Danh Sách Tin Tức</h1>
-        <a href="add.php?controller=news&action=add" class="btn btn-success mb-3">Thêm Tin Tức</a>
+    <div class="container">
+        <header>
+            <h1>Danh sách Tin tức</h1>
+            <a href="index.php?controller=news&action=add" class="btn btn-add">Thêm tin mới</a>
+        </header>
 
-        <!-- Kiểm tra nếu có tin tức -->
-        <?php if (!empty($newsList)): ?>
-            <table class="table table-bordered">
-                <thead>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tiêu đề</th>
+                    <th>Nội dung</th>
+                    <th>Hình ảnh</th>
+                    <th>Danh mục</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($newsList as $news): ?>
                     <tr>
-                        <th>Tiêu Đề</th>
-                        <th>Danh Mục</th>
-                        <th>Ngày Tạo</th>
-                        <th>Hành Động</th>
+                        <td><?= $news['id'] ?></td>
+                        <td><?= htmlspecialchars($news['title']) ?></td>
+                        <td><?= htmlspecialchars($news['content']) ?></td>
+                        <td><?= htmlspecialchars($news['image']) ?></td>
+                        <td><?= htmlspecialchars($news['category_id']) ?></td>
+                        <td>
+                            <a href="index.php?controller=news&action=edit&id=<?= $news['id'] ?>" class="btn btn-edit">Sửa</a>
+                            <a href="index.php?controller=news&action=delete&id=<?= $news['id'] ?>" class="btn btn-delete" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">Xóa</a>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($newsList as $news): ?>
-                        <tr>
-                            <td><?= htmlspecialchars($news['title']) ?></td>
-                            <td><?= htmlspecialchars($news['category_id']) ?></td>
-                            <td><?= date('d-m-Y', strtotime($news['created_at'])) ?></td>
-                            <td>
-                                <a href="edit.php?controller=news&action=edit&id=<?= $news['id'] ?>" class="btn btn-primary">Sửa</a>
-                                <a href="index.php?controller=news&action=delete&id=<?= $news['id'] ?>" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa tin tức này?')">Xóa</a>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        <?php else: ?>
-            <p>Không có tin tức nào.</p>
-        <?php endif; ?>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
     </div>
 </body>
 </html>
